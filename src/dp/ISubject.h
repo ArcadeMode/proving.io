@@ -9,7 +9,7 @@
    class ISubject {
         
         public:
-            virtual void addObserver(IObserver<T> observer);
+            virtual void addObserver(IObserver<T>* observer);
    };
 
 #endif

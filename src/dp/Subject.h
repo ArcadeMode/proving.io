@@ -1,18 +1,20 @@
-#include <dp/ISubject.h>
-#include <dp/IObserver.h>
-#include <list>
-
 #ifndef Subject_H
 #define Subject_H
+
+#include <dp/ISubject.h>
+#include <dp/IObserver.h>
+#include <memory>
+#include <list>
+
     template <typename T>
     /*abstract*/ class Subject : public ISubject<T> {
         private:
-            std::list<IObserver<T>> observers;
+            std::list<std::unique_ptr<IObserver<T>>> observers;
 
         protected:
             void updateObservers(T value) {
-                for (IObserver<T> observer : observers) {
-                    observer.update(value);
+                for (auto&& observer : observers) {
+                    observer->update(value);
                 }
             }
 
@@ -21,8 +23,8 @@
                 observers = { };
             }
 
-            void addObserver(IObserver<T> observer) {
-                observers.push_back(observer);
+            void addObserver(IObserver<T>* observer) {
+                observers.push_back(std::unique_ptr<IObserver<T>>(observer));
             }
 
             /**
@@ -35,19 +37,18 @@
    template <>
     /*abstract*/ class Subject<void> : public ISubject<void> {
         private:
-            std::list<IObserver<void>> observers;
+            std::list<std::unique_ptr<IObserver<void>>> observers;
         protected:
             void updateObservers() {
-                for (IObserver<void> observer : observers) {
-                    observer.update();
+                for (auto&& observer : observers) {
+                    observer->update();
                 }
             }
         public:
-            Subject() {
-                observers = { };
-            }
-            void addObserver(IObserver<void> observer) {
-                observers.push_back(observer);
+            Subject() {} 
+
+            void addObserver(IObserver<void>* observer) {
+                observers.push_back(std::unique_ptr<IObserver<void>>(observer));
             }
 
             /**
