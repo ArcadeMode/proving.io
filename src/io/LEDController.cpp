@@ -4,20 +4,32 @@
 
 LEDController::LEDController(int pin) {
     pinId = pin;
-
+    state = 0;
     pinMode(pinId, OUTPUT);
 }
 
+int LEDController::getState() {
+    return state;
+}
+
 void LEDController::on() {
-    write(HIGH);
+    state = HIGH;
+    write(state);
 }
 
 void LEDController::off() {
-    write(LOW);
+    state = LOW;
+    write(state);
+}
+
+void LEDController::toggle() {
+    state = !state;
+    write(state);
 }
 
 void LEDController::write(int val) {
     val = pinId == LED_BUILTIN ? !val : val;//on-board is inverted
     digitalWrite(pinId, val);
 }
+
 
