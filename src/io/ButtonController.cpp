@@ -3,7 +3,7 @@
 
 #include <Arduino.h>
 #include <dp/ISubject.h>
-#include <dp/Subject.cpp>
+#include <dp/Subject.h>
 #include <stdexcept>
 
 ButtonController::ButtonController(int pin) {

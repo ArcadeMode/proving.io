@@ -1,6 +1,6 @@
 
 #include <dp/ISubject.h>
-#include <dp/Subject.cpp>
+#include <dp/Subject.h>
 
 #ifndef ButtonController_H
 #define ButtonController_H

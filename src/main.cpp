@@ -46,7 +46,7 @@ LCDController lcdCtrl(lcd);
 void setup()
 {
     lcdCtrl.init();
-    btnCtrl.addObserver(lcdCtrl);
+    btnCtrl.addObserver(&lcdCtrl);
 
     Serial.begin(9600);
 
