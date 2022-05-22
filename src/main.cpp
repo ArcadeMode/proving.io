@@ -38,19 +38,28 @@
 #include <LiquidCrystal_I2C.h>
 #include <io/ButtonController.h>
 #include <io/LCDController.h>
+int btnPin = D3;
 
 LiquidCrystal_I2C lcd(0x27, 16, 2);
-ButtonController btnCtrl(D4);
-LCDController lcdCtrl(lcd);
+ButtonController btnCtrl(btnPin);
+LCDController lcdCtrl(&lcd);
 
 void setup()
 {
-    lcdCtrl.init();
-    btnCtrl.addObserver(&lcdCtrl);
-
     Serial.begin(9600);
 
     Serial.println("sah dude");
+    
+    lcdCtrl.init();
+
+    btnCtrl.getState()->subscribe([](bool b) {
+        Serial.print("BUTTON STATE: ");
+        Serial.println(b);
+    });
+
+    //btnCtrl.addObserver(&lcdCtrl);
+
+    
 }
 
 void loop()
@@ -58,5 +67,5 @@ void loop()
     btnCtrl.read();
 
 
-    delay(1000);
+    delay(6);
 }

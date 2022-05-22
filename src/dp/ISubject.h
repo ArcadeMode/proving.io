@@ -1,6 +1,5 @@
 
 
-#include <dp/IObserver.h>
 
 #ifndef ISubject_H
 #define ISubject_H
@@ -9,7 +8,7 @@
    class ISubject {
         
         public:
-            virtual void addObserver(IObserver<T>* observer);
+            virtual void next(T value);
    };
 
 #endif

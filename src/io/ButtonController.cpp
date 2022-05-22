@@ -12,26 +12,28 @@ ButtonController::ButtonController(int pin) {
 
     lastDebounceTime = 0; 
     debounceDelay = 50;
-    buttonState = HIGH;
-    lastButtonState = HIGH;
+    readState = HIGH;
+    lastReadState = HIGH;
+
 }
 
-void ButtonController::read() {
-    
+void ButtonController::read() {  
     int reading = digitalRead(pinId);
-    if(reading != lastButtonState) {
+    if(reading != lastReadState) {
         lastDebounceTime = millis();
     }
-
-    if ((millis() - lastDebounceTime) > debounceDelay && buttonState != reading) {
+    //Serial.print("BEEP BOOP");
+    if ((millis() - lastDebounceTime) > debounceDelay && readState != reading) {
         if(reading == LOW) {
-            updateObservers();
+            buttonState = !buttonState;
+            subject.next(buttonState);
         }
-        buttonState = reading;
+        readState = reading;
     }
-    lastButtonState = reading;
+    
+    lastReadState = reading;
 }
 
-int ButtonController::getState() {
-    return buttonState;
+IObservable<bool>* ButtonController::getState() {
+    return &subject;
 }

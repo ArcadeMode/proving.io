@@ -1,32 +1,18 @@
 #include <Arduino.h>
 #include <LiquidCrystal_I2C.h>
 #include <io/ButtonController.h>
-#include <dp/IObserver.h>
 
 #ifndef LCDController_H
 #define LCDController_H
 
-   class LCDController: public IObserver<void> {
+   class LCDController {
         private:
-            LiquidCrystal_I2C &lcd; 
-            bool state = false;
+            LiquidCrystal_I2C* lcd; 
+            int state;
         public:
-            LCDController(LiquidCrystal_I2C &lcdRef) : lcd(lcdRef) {
-            }
+            LCDController(LiquidCrystal_I2C* lcdRef);
 
-            void init() {
-                lcd.init();
-                lcd.backlight();
-                lcd.setCursor(0,0);
-            }
-
-            void update() {
-                state = !state;
-                lcd.clear();
-                lcd.print("State: ");
-                lcd.print(state);
-            }
-            
+            void init();
         
    };
 

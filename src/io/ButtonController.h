@@ -1,21 +1,21 @@
 
-#include <dp/ISubject.h>
 #include <dp/Subject.h>
 
 #ifndef ButtonController_H
 #define ButtonController_H
 
-   class ButtonController: public Subject<void> {
+   class ButtonController {
         private:
             int pinId;
             unsigned long lastDebounceTime; 
             unsigned long debounceDelay;
-            int buttonState;
-            int lastButtonState;
-
+            int readState;
+            int lastReadState;
+            bool buttonState;
+            Subject<bool> subject;
         public:
             ButtonController(int pin);
-            int getState();
+            IObservable<bool>* getState();
             void read();
         
    };
