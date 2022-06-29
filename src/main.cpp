@@ -106,44 +106,44 @@
 
 // }
 
-// #include <Arduino.h>
+#include <Arduino.h>
 
-// int S0 = D6;
-// int S1 = D7;
-// int S2 = D8;
+int S0 = D6;
+int S1 = D7;
+int S2 = D8;
 
 
-// void setup() {
-//     pinMode(S0, OUTPUT);
-//     pinMode(S1, OUTPUT);
-//     pinMode(S2, OUTPUT);
-//     pinMode(A0, INPUT);
+void setup() {
+    pinMode(S0, OUTPUT);
+    pinMode(S1, OUTPUT);
+    pinMode(S2, OUTPUT);
+    pinMode(A0, INPUT);
 
-//     Serial.begin(9600);
-// }
+    Serial.begin(9600);
+}
 
-// void loop() {
+void loop() {
 
-//     digitalWrite(S0, LOW);
-//     digitalWrite(S1, LOW);
-//     digitalWrite(S2, LOW);
-//     int btn = analogRead(A0);
-//     Serial.print("Button ");
-//     Serial.println(btn);
+    digitalWrite(S0, LOW);
+    digitalWrite(S1, LOW);
+    digitalWrite(S2, LOW);
+    int btn = analogRead(A0);
+    Serial.print("Button ");
+    Serial.println(btn);
 
-//     digitalWrite(S0, HIGH);
-//     digitalWrite(S1, LOW);
-//     digitalWrite(S2, LOW);
-//     int pot0 = analogRead(A0);
-//     Serial.print("Pot0 ");
-//     Serial.println(pot0);
+    digitalWrite(S0, HIGH);
+    digitalWrite(S1, LOW);
+    digitalWrite(S2, LOW);
+    int pot0 = analogRead(A0);
+    Serial.print("Pot0 ");
+    Serial.println(pot0);
 
-//     digitalWrite(S0, LOW);
-//     digitalWrite(S1, HIGH);
-//     digitalWrite(S2, LOW);
-//     int pot1 = analogRead(A0);
-//     Serial.print("Pot1 ");
-//     Serial.println(pot1);
+    digitalWrite(S0, LOW);
+    digitalWrite(S1, HIGH);
+    digitalWrite(S2, LOW);
+    int pot1 = analogRead(A0);
+    Serial.print("Pot1 ");
+    Serial.println(pot1);
     
-//     delay(500);
-// }
+    delay(500);
+}
